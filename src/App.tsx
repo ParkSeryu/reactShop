@@ -5,6 +5,8 @@ import {Container, Nav, Navbar} from "react-bootstrap";
 import bg from './img/bg.png';
 import shoes1 from './img/shoes1.jpg';
 import 서버 from './data'
+import ShoesComponent from "./ShoesComponent";
+
 
 function App() {
     let [shoes] = useState(서버);
@@ -26,23 +28,10 @@ function App() {
 
             <div className="container">
                 <div className="row">
-                    <div className="col-md-4">
-                        <img src={shoes1} width={"80%"}></img>
-                        <h4>{shoes[0].title}</h4>
-                        <p>{shoes[0].content}</p>
-                    </div>
-                    <div className="col-md-4"><img src={"https://codingapple1.github.io/shop/shoes2.jpg"}
-                                                   width={"80%"}></img>
-                        <h4>{shoes[1].title}</h4>
-                        <p>{shoes[1].content}</p>
-                    </div>
-                    <div className="col-md-4">
-                        <img src={"https://codingapple1.github.io/shop/shoes3.jpg"}
-                             alt={"shoes3"}
-                             width={"80%"}></img>
-                        <h4>{shoes[2].title}</h4>
-                        <p>{shoes[2].content}</p>
-                    </div>
+                    {shoes.map((ele, index) => {
+                        return <ShoesComponent key={index} id={ele.id} title={ele.title} content={ele.content}
+                                               price={ele.price}/>
+                    })}
                 </div>
             </div>
         </div>
