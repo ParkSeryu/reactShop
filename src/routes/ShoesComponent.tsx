@@ -1,4 +1,3 @@
-import shoes1 from "./img/shoes1.jpg";
 import React from "react";
 
 const ShoesComponent = (props: any) => {
