@@ -43,7 +43,7 @@ function App() {
                         </div>
                     </div>
                 </>}/>
-                <Route path="/detail" element={<DetailComponent/>}/>
+                <Route path="/detail/:id" element={<DetailComponent shoes={shoes}/>}/>
 
                 <Route path={"/about"} element={<About/>}>
                     <Route path={"member"} element={<div>멤버임</div>}/>

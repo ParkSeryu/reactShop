@@ -1,13 +1,13 @@
 let data = [
     {
-        id: 0,
+        id: 12,
         title: "White and Black",
         content: "Born in France",
         price: 120000
     },
 
     {
-        id: 1,
+        id: 0,
         title: "Red Knit",
         content: "Born in Seoul",
         price: 110000
