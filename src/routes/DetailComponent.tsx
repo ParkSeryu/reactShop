@@ -1,5 +1,22 @@
 import React from "react";
 import {useParams} from "react-router-dom";
+import styled from "styled-components";
+
+interface ButtonProps {
+    bg?: string; // Define bg property as optional
+}
+
+
+const YellowBtn = styled.button<ButtonProps>`
+    background: ${props => props.bg};
+    color: black;
+    padding: 10px;
+`
+
+let Box = styled.div`
+    background: grey;
+    padding: 20px;
+`
 
 const DetailComponent = (props: any) => {
     const {id} = useParams();
@@ -7,7 +24,6 @@ const DetailComponent = (props: any) => {
     const test = props.shoes.find((ele: {
         id: number;
     }) => ele.id === index)
-    console.log(test)
 
 
     // @ts-ignore
@@ -22,9 +38,10 @@ const DetailComponent = (props: any) => {
                     <h4 className={"pt-5"}>{test.title}</h4>
                     <p>{test.content}</p>
                     <p>{test.price}</p>
-
-
-                    <button className={"btn btn-danger"}>주문하기</button>
+                    <Box>
+                        <YellowBtn bg="blue">주문하기</YellowBtn>
+                        <YellowBtn bg="orange">주문하기</YellowBtn>
+                    </Box>
                 </div>
             </div>
 

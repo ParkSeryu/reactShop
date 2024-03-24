@@ -1,6 +1,6 @@
 let data = [
     {
-        id: 12,
+        id: 1,
         title: "White and Black",
         content: "Born in France",
         price: 120000
