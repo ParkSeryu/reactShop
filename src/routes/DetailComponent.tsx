@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
 
@@ -19,16 +19,33 @@ let Box = styled.div`
 `
 
 const DetailComponent = (props: any) => {
+    let [count, setCount] = useState(0);
+    const [show, setShow] = useState(true);
     const {id} = useParams();
     const index = Number(id)
     const test = props.shoes.find((ele: {
         id: number;
     }) => ele.id === index)
 
+    useEffect(() => {
+        setTimeout(() => {
+            setShow(false);
+        }, 1000)
+    },);
 
     // @ts-ignore
     return (
         <div className="container">
+            {show &&
+                <div className={"alert alert-warning"}>
+                    2초이내 구매시 할인
+                </div>
+            }
+            {count}
+            <button onClick={() => {
+                setCount(count + 1)
+            }}>버튼
+            </button>
             <div className={"row"}>
                 <div className={"col-md-6"}>
                     <img src={"https://codingapple1.github.io/shop/shoes1.jpg"} width="100%"/>
