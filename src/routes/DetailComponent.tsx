@@ -22,6 +22,7 @@ let Box = styled.div`
 const DetailComponent = (props: any) => {
     const [show, setShow] = useState(true);
     const [text, setText] = useState<any>();
+    const [fade, setFade] = useState('');
     const [탭, 탭변경] = useState(1);
     const {id} = useParams();
     const index = Number(id)
@@ -32,7 +33,12 @@ const DetailComponent = (props: any) => {
     useEffect(() => {
         setTimeout(() => {
             setShow(false);
+            setFade('end')
         }, 1000)
+
+        return () => {
+            setFade('');
+        }
     }, []);
 
     useEffect(() => {
@@ -45,7 +51,7 @@ const DetailComponent = (props: any) => {
 
     // @ts-ignore
     return (
-        <div className="container">
+        <div className={`container start ${fade}`}>
             {show &&
                 <div className={"alert alert-warning"}>
                     2초이내 구매시 할인
@@ -62,7 +68,6 @@ const DetailComponent = (props: any) => {
                     <p>{findData.price}</p>
                     <Box>
                         <YellowBtn bg="blue">주문하기</YellowBtn>
-                        <YellowBtn bg="orange">주문하기</YellowBtn>
                     </Box>
                 </div>
             </div>
@@ -95,15 +100,25 @@ const DetailComponent = (props: any) => {
 }
 
 const TabContent = ({탭}: any) => {
-    if (탭 === 0) {
-        return <div>내용0</div>
-    } else if (탭 === 1) {
-        return <div>내용1</div>
-    } else if (탭 === 2) {
-        return <div>내용2</div>
-    }
 
-    return null;
+    const [fade, setFade] = useState('');
+
+    useEffect(() => {
+        setTimeout(() => {
+            setFade('end')
+        }, 100)
+        return () => {
+            setFade('')
+        }
+    }, [탭]);
+
+    return <div className={`start ${fade}`}>
+        {[
+            <div>내용0</div>,
+            <div>내용1</div>,
+            <div>내용2</div>
+        ][탭]}
+    </div>
 }
 
 
