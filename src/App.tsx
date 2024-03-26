@@ -7,6 +7,7 @@ import data from './data'
 import ShoesComponent from "./routes/ShoesComponent";
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
 import DetailComponent from "./routes/DetailComponent";
+import axios from 'axios';
 
 
 function App() {
@@ -42,6 +43,12 @@ function App() {
                             })}
                         </div>
                     </div>
+                    <button onClick={() => {
+                        axios.get('https://codingapple1.github.io/shop/data2.json').then((data) => {
+                            console.log(data.data)
+                        })
+                    }}>버튼
+                    </button>
                 </>}/>
                 <Route path="/detail/:id" element={<DetailComponent shoes={shoes}/>}/>
 
