@@ -9,9 +9,9 @@ import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
 import DetailComponent from "./routes/DetailComponent";
 import axios from 'axios';
 
-
 function App() {
-    let [shoes] = useState(data);
+    let [shoes, setShoes] = useState(data);
+    let [count, setCount] = useState(2);
     let navigate = useNavigate();
 
     return (
@@ -44,9 +44,13 @@ function App() {
                         </div>
                     </div>
                     <button onClick={() => {
-                        axios.get('https://codingapple1.github.io/shop/data2.json').then((data) => {
-                            console.log(data.data)
-                        })
+                        setCount(count + 1);
+                        axios.get(`https://codingapple1.github.io/shop/data${count}.json`).then((data) => {
+                            setShoes([...shoes, ...data.data]);
+                        }).catch((error) => {
+                                alert('상품이 업성요')
+                            }
+                        )
                     }}>버튼
                     </button>
                 </>}/>
