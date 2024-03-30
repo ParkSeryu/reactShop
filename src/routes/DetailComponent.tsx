@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import styled from "styled-components";
 import {Nav} from 'react-bootstrap';
+import {Context1} from './../App';
 
 interface ButtonProps {
     bg?: string; // Define bg property as optional
@@ -29,6 +30,8 @@ const DetailComponent = (props: any) => {
     const findData = props.shoes.find((ele: {
         id: number;
     }) => ele.id === index)
+    let {재고} = useContext(Context1);
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -51,6 +54,7 @@ const DetailComponent = (props: any) => {
 
     // @ts-ignore
     return (
+
         <div className={`container start ${fade}`}>
             {show &&
                 <div className={"alert alert-warning"}>
@@ -91,7 +95,7 @@ const DetailComponent = (props: any) => {
 
                 </Nav.Item>
             </Nav>
-            <TabContent 탭={탭}/>
+            <TabContent 탭={탭} shoes={props.shoes}/>
             {/*{
                 탭 === 0 ? <div>내용0</div> : 탭 === 1 ? <div>내용1</div> : <div>내용2</div>
             }*/}
@@ -99,7 +103,8 @@ const DetailComponent = (props: any) => {
     )
 }
 
-const TabContent = ({탭}: any) => {
+const TabContent = ({탭, shoes}: any) => {
+    let {재고} = useContext(Context1)
 
     const [fade, setFade] = useState('');
 
@@ -114,9 +119,9 @@ const TabContent = ({탭}: any) => {
 
     return <div className={`start ${fade}`}>
         {[
-            <div>내용0</div>,
-            <div>내용1</div>,
-            <div>내용2</div>
+            <div>{재고}</div>,
+            <div>{shoes[0].content}</div>,
+            <div>{shoes[0].price}</div>
         ][탭]}
     </div>
 }
