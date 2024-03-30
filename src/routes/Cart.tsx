@@ -1,6 +1,17 @@
+import {ReactElement, JSXElementConstructor, ReactNode, ReactPortal} from "react";
 import {Table} from "react-bootstrap";
+import {useSelector} from "react-redux";
 
+type stocks = {
+    id: number,
+    name: string,
+    count: number
+}
 const Cart = () => {
+
+    const stock = useSelector((state: any) => state.stock);
+
+
     return (
         <div>
             <Table>
@@ -13,12 +24,14 @@ const Cart = () => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>안녕</td>
-                    <td>안녕</td>
-                    <td>안녕</td>
-                </tr>
+                {stock.map((ele: stocks) => (
+                    <tr key={ele.id}>
+                        <td>{ele.id}</td>
+                        <td>{ele.name}</td>
+                        <td>{ele.count}</td>
+                        <td>안녕</td>
+                    </tr>
+                ))}
                 </tbody>
             </Table>
         </div>
