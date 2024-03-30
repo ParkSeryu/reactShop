@@ -1,6 +1,6 @@
 import {Table} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {addStock} from "../store/stockSlice";
+import {addStock} from "../store/StockSlice";
 import {useEffect} from "react";
 
 type states = {

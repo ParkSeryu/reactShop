@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import styled from "styled-components";
 import {Nav} from 'react-bootstrap';
 import {Context1} from './../App';
-import {addState, addStock} from "../store/stockSlice";
+import {addState, addStock} from "../store/StockSlice";
 import {useDispatch} from "react-redux";
 
 interface ButtonProps {
@@ -75,7 +75,7 @@ const DetailComponent = (props: any) => {
                     <p>{findData.price}</p>
                     <Box>
                         <YellowBtn onClick={() => {
-                            dispatch(addStock(12));
+                            dispatch(addState({id: findData.id, name: findData.title, count: 1}));
                         }} bg="blue">주문하기</YellowBtn>
                     </Box>
                 </div>

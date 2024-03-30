@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const stockSlice = createSlice({
+const StockSlice = createSlice({
     name: 'stock',
     initialState: [
         {id: 0, name: 'White and Black', content: 'test', count: 2},
@@ -13,12 +13,11 @@ const stockSlice = createSlice({
             ))
         },
         addState(state, actions) {
-            console.log('test')
-            return [...state, actions.payload];
+            state.push(actions.payload);
         }
     }
 })
 
-export const {addStock, addState} = stockSlice.actions
+export const {addStock, addState} = StockSlice.actions
 
-export default stockSlice;
+export default StockSlice;
