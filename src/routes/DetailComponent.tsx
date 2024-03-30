@@ -3,6 +3,8 @@ import {useParams} from "react-router-dom";
 import styled from "styled-components";
 import {Nav} from 'react-bootstrap';
 import {Context1} from './../App';
+import {addState, addStock} from "../store/stockSlice";
+import {useDispatch} from "react-redux";
 
 interface ButtonProps {
     bg?: string; // Define bg property as optional
@@ -31,6 +33,7 @@ const DetailComponent = (props: any) => {
         id: number;
     }) => ele.id === index)
     let {재고} = useContext(Context1);
+    let dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -71,7 +74,9 @@ const DetailComponent = (props: any) => {
                     <p>{findData.content}</p>
                     <p>{findData.price}</p>
                     <Box>
-                        <YellowBtn bg="blue">주문하기</YellowBtn>
+                        <YellowBtn onClick={() => {
+                            dispatch(addStock(12));
+                        }} bg="blue">주문하기</YellowBtn>
                     </Box>
                 </div>
             </div>
