@@ -1,6 +1,7 @@
 import {ReactElement, JSXElementConstructor, ReactNode, ReactPortal} from "react";
 import {Table} from "react-bootstrap";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {addStock} from "../store";
 
 type stocks = {
     id: number,
@@ -9,11 +10,13 @@ type stocks = {
 }
 const Cart = () => {
 
-    const stock = useSelector((state: any) => state.stock);
+    const stock = useSelector((state: any) => state);
+    let dispatch = useDispatch()
 
 
     return (
         <div>
+            {stock.user} 의 장바구니
             <Table>
                 <thead>
                 <tr>
@@ -24,12 +27,17 @@ const Cart = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {stock.map((ele: stocks) => (
+                {stock.stock.map((ele: stocks) => (
                     <tr key={ele.id}>
                         <td>{ele.id}</td>
                         <td>{ele.name}</td>
                         <td>{ele.count}</td>
-                        <td>안녕</td>
+                        <td>
+                            <button onClick={() => {
+                                dispatch(addStock());
+                            }}>+
+                            </button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
