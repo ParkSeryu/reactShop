@@ -35,7 +35,6 @@ const DetailComponent = (props: any) => {
     let {재고} = useContext(Context1);
     let dispatch = useDispatch()
 
-
     useEffect(() => {
         setTimeout(() => {
             setShow(false);

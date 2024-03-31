@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, lazy, Suspense, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {Container, Nav, Navbar} from "react-bootstrap";
@@ -6,10 +6,12 @@ import bg from './img/bg.png';
 import data from './data'
 import ShoesComponent from "./routes/ShoesComponent";
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
-import DetailComponent from "./routes/DetailComponent";
 import axios from 'axios';
-import Cart from './routes/Cart';
 import {useQuery} from "react-query";
+
+const DetailComponent = lazy(() => import('./routes/DetailComponent'));
+const Cart = lazy(() => import('./routes/Cart'));
+
 
 interface ContextValue {
     재고: number[];
@@ -24,10 +26,6 @@ function App() {
     let [재고] = useState([10, 11, 12]);
     let navigate = useNavigate();
 
-    axios.get('https://codingapple1.github.io/userdata.json').then((a) => {
-        console.log(a)
-    })
-
     const result = useQuery('작명', () =>
             axios.get('https://codingapple1.github.io/userdata.json').then((a) => {
                 console.log('요청')
@@ -37,7 +35,6 @@ function App() {
     )
 
     useEffect(() => {
-        console.log('?')
         if (!localStorage.getItem('watched')) {
             localStorage.setItem('watched', JSON.stringify([]))
         }
@@ -91,7 +88,9 @@ function App() {
                 </>}/>
                 <Route path="/detail/:id" element={
                     <Context1.Provider value={{재고, shoes}}>
-                        <DetailComponent shoes={shoes}/>
+                        <Suspense fallback={<div>로딩중임</div>}>
+                            <DetailComponent shoes={shoes}/>
+                        </Suspense>
                     </Context1.Provider>
                 }/>
 
