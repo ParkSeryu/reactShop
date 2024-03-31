@@ -42,10 +42,22 @@ const DetailComponent = (props: any) => {
             setFade('end')
         }, 1000)
 
+
         return () => {
             setFade('');
         }
     }, []);
+
+    useEffect(() => {
+        if (!id) return;
+        const abc = localStorage.getItem('watched');
+        const localData: string[] = abc && JSON.parse(abc);
+        if (!localData.includes(id)) {
+            localData.push(id);
+            localStorage.setItem('watched', JSON.stringify(localData));
+        }
+    }, [id]);
+
 
     useEffect(() => {
 

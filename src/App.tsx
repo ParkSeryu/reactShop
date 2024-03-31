@@ -23,9 +23,12 @@ function App() {
     let [재고] = useState([10, 11, 12])
 
     useEffect(() => {
-        localStorage.setItem('watched', JSON.stringify([]))
+        console.log('?')
+        if (!localStorage.getItem('watched')) {
+            localStorage.setItem('watched', JSON.stringify([]))
+        }
     }, [])
-    
+
 
     let navigate = useNavigate();
 
