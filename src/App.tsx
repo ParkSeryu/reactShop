@@ -9,6 +9,7 @@ import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom';
 import DetailComponent from "./routes/DetailComponent";
 import axios from 'axios';
 import Cart from './routes/Cart';
+import {useQuery} from "react-query";
 
 interface ContextValue {
     재고: number[];
@@ -20,7 +21,20 @@ export let Context1 = createContext<ContextValue>({재고: [], shoes: []});
 function App() {
     let [shoes, setShoes] = useState(data);
     let [count, setCount] = useState(2);
-    let [재고] = useState([10, 11, 12])
+    let [재고] = useState([10, 11, 12]);
+    let navigate = useNavigate();
+
+    axios.get('https://codingapple1.github.io/userdata.json').then((a) => {
+        console.log(a)
+    })
+
+    const result = useQuery('작명', () =>
+            axios.get('https://codingapple1.github.io/userdata.json').then((a) => {
+                console.log('요청')
+                return a.data
+            }),
+        {staleTime: 2000}
+    )
 
     useEffect(() => {
         console.log('?')
@@ -29,8 +43,6 @@ function App() {
         }
     }, [])
 
-
-    let navigate = useNavigate();
 
     return (
         <div className="App">
@@ -48,6 +60,8 @@ function App() {
                             navigate('/cart')
                         }}>Cart</Nav.Link>
                     </Nav>
+                    <Nav className="ms-auto"><span
+                        style={{color: "white"}}>{result.isLoading ? '로딩중' : result.data.name}</span></Nav>
                 </Container>
             </Navbar>
 
