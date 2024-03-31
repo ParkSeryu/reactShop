@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {Container, Nav, Navbar} from "react-bootstrap";
@@ -21,6 +21,11 @@ function App() {
     let [shoes, setShoes] = useState(data);
     let [count, setCount] = useState(2);
     let [재고] = useState([10, 11, 12])
+
+    useEffect(() => {
+        localStorage.setItem('watched', JSON.stringify([]))
+    }, [])
+    
 
     let navigate = useNavigate();
 
