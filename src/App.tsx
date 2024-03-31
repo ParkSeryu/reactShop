@@ -1,4 +1,4 @@
-import React, {createContext, lazy, Suspense, useEffect, useState} from 'react';
+import React, {createContext, lazy, Suspense, useDeferredValue, useEffect, useState, useTransition} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {Container, Nav, Navbar} from "react-bootstrap";
@@ -19,12 +19,16 @@ interface ContextValue {
 }
 
 export let Context1 = createContext<ContextValue>({재고: [], shoes: []});
+let a = new Array(10000).fill(0);
 
 function App() {
     let [shoes, setShoes] = useState(data);
     let [count, setCount] = useState(2);
     let [재고] = useState([10, 11, 12]);
     let navigate = useNavigate();
+    let [name, setName] = useState('');
+    let [isPending, startTransition] = useTransition();
+    let state1 = useDeferredValue(name);
 
     const result = useQuery('작명', () =>
             axios.get('https://codingapple1.github.io/userdata.json').then((a) => {
@@ -43,6 +47,16 @@ function App() {
 
     return (
         <div className="App">
+            <input onChange={(e) => {
+                startTransition(() => {
+                    setName(e.target.value)
+                })
+            }}/>
+            {
+                a.map(() => {
+                    return <div>{state1}</div>
+                })
+            }
             <Navbar bg="dark" data-bs-theme="dark">
                 <Container>
                     <Navbar.Brand href="#home">Navbar</Navbar.Brand>

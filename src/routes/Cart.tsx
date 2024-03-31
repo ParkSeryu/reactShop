@@ -25,10 +25,6 @@ const Cart = () => {
     let dispatch = useDispatch()
     let [count, setCount] = useState(0);
 
-    useMemo(() => {
-        return 함수()
-    })
-
     useEffect(() => {
         console.log(state)
     }, [state]);
